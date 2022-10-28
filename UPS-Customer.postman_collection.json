@@ -1,0 +1,467 @@
+{
+	"info": {
+		"_postman_id": "f6cd5af9-476a-4702-b548-9228fa5f2909",
+		"name": "UPS-Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "takeExclusiveSignOnControl",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "trapi.database-subscriptions.users.crud",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "9240d517b2c04dc881b6860122c1c3731eed7fb4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/oauth2/beta1/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"oauth2",
+						"beta1",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user access",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"users"
+					],
+					"query": [
+						{
+							"key": "aaaId",
+							"value": "GENTC-193157",
+							"disabled": true
+						},
+						{
+							"key": "active",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "omitDatasets",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user access",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userIds\": [\r\n    \"upsqatestuser3@gmail.com\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"users"
+					],
+					"query": [
+						{
+							"key": "aaaId",
+							"value": "GENTC-1196698",
+							"disabled": true
+						},
+						{
+							"key": "aaaId",
+							"value": "GENTC-943974",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "terminate user access",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userIds\": [\r\n     \"upsqatestuser3@gmail.com\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"users"
+					],
+					"query": [
+						{
+							"key": "aaaId",
+							"value": "GENTC-1196698",
+							"disabled": true
+						},
+						{
+							"key": "aaaId",
+							"value": "GENTC-943974",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activate user access",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userIds\": [\r\n    \"upsqatestuser3@gmail.com\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user access",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userIds\": [\r\n     \"test@gmail.com\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/users",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"users"
+					],
+					"query": [
+						{
+							"key": "aaaId",
+							"value": "GENTC-1196698",
+							"disabled": true
+						},
+						{
+							"key": "aaaId",
+							"value": "GENTC-943974",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Account Allow List , Deny List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"denyList\" : [\"^[A-Za-z0-9._%+-]+@gmail.com$\"],\r\n    \"allowList\" : []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/accounts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "aaaId",
+							"value": "GENTC-1196698",
+							"disabled": true
+						},
+						{
+							"key": "aaaId",
+							"value": "GENTC-943974",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check User Impact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ACCESS_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"allowList\" : [],\r\n    \"denyList\" : [\"^[A-Za-z0-9._%+-]+@gmail.com$\", \"^[A-Za-z0-9._%+-]+@test.com$\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.ppe.refinitiv.com/auth/cloud-access/beta1/retrieval-stores/VBD_BIG_QUERY/accounts/check-impact",
+					"protocol": "https",
+					"host": [
+						"api",
+						"ppe",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"auth",
+						"cloud-access",
+						"beta1",
+						"retrieval-stores",
+						"VBD_BIG_QUERY",
+						"accounts",
+						"check-impact"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
